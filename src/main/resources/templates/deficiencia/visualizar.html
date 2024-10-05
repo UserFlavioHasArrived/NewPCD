@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/layout :: layout}">
+    <body th:fragment="content">  
+
+        <div class="card mt-2" th:object="${deficienciaForm}">
+            <div class="card-header">
+                <h3 class="card-title">Formulário de Visualização</h3>
+            </div>
+            <div class="card-body">                           
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input disabled type="text" id="nome" placeholder="Ex.: João dos Exemplos" th:field="*{nome}" class="form-control">
+                        <div th:if="${errors != null && #fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="categoria" class="form-label">Deficiência:</label>
+                        <select disabled id="categoria" class="form-select" th:field="*{categoria}">
+                            <option th:each="categoria : *{listCategorias}"
+                                th:value="${categoria.id}"
+                                th:text="${categoria.nome}">
+                            </option>                    
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="/deficiencia" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>    
+
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/layout :: layout}">
+    <body th:fragment="content">  
+
+        <div class="card mt-2" th:object="${pessoaForm}">
+            <div class="card-header">
+                <h3 class="card-title">Formulário de Visualização</h3>
+            </div>
+            <div class="card-body">                           
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input disabled type="text" id="nome" placeholder="Ex.: João dos Exemplos" th:field="*{nome}" class="form-control">
+                        <div th:if="${errors != null && #fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="nascimento" class="form-label">Data de nascimento:</label>
+                        <input disabled type="date" id="nascimento" th:field="*{nascimento}" class="form-control">
+                        <div th:if="${errors != null && #fields.hasErrors('nascimento')}" th:errors="*{nascimento}"></div>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="sexo" class="form-label">Sexo:</label>
+                        <select disabled id="sexo" class="form-select" th:field="*{sexo}">
+                            <option th:each="sexo : ${T(com.example.demo.Enum.Sexo).values()}"
+                                th:value="${sexo.codigo}"
+                                th:text="${sexo.descricao}">
+                            </option>                    
+                        </select>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="deficiencia" class="form-label">Deficiência:</label>
+                        <select disabled id="deficiencia" class="form-select" th:field="*{deficiencia}">
+                            <option th:each="deficiencia : *{listDeficiencias}"
+                                th:value="${deficiencia.id}"
+                                th:text="${deficiencia.nome}">
+                            </option>                    
+                        </select>
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="cep" class="form-label">CEP:</label>
+                        <input disabled id="cep" type="text" class="form-control" placeholder="99999-999" 
+                        th:field="*{cep}">
+                    </div>
+                    <div class="mb-2 col-md-2">
+                        <label for="uf" class="form-label">UF:</label>
+                        <input disabled id="uf" readonly class="form-control" th:field="*{uf}">
+                    </div>
+                    <div class="mb-2 col-md-2">
+                        <label for="cidade" class="form-label">Cidade:</label>
+                        <input disabled id="cidade" readonly class="form-control" th:field="*{cidade}">
+                    </div>
+                    <div class="mb-2 col-md-2">
+                        <label for="bairro" class="form-label">Bairro:</label>
+                        <input disabled id="bairro" readonly class="form-control" th:field="*{bairro}">
+                    </div>
+                    <div class="mb-2 col-md-6">
+                        <label for="logradouro" class="form-label">Logradouro:</label>
+                        <input disabled id="logradouro" readonly class="form-control" th:field="*{logradouro}">
+                    </div>
+                    <div class="mb-2 col-md-2">
+                        <label for="numero" class="form-label">Número:</label>
+                        <input disabled id="numero"  class="form-control" th:field="*{numero}">
+                    </div>
+                    <div class="mb-2 col-md-10">
+                        <label for="complemento" class="form-label">Complemento:</label>
+                        <input disabled id="complemento"  class="form-control" th:field="*{complemento}">
+                    </div>
+            
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="/pessoa" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>    
+
+    </body>
+</html>
